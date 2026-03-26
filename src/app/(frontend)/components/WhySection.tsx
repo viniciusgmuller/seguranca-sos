@@ -36,7 +36,7 @@ export default async function WhySection() {
 
         {/* Right column */}
         <div className="flex-1 pt-0 lg:pt-5">
-          {bulletPoints?.map((point, index) => {
+          {bulletPoints?.map((point: { title: string; subtitle?: string }, index: number) => {
             const number = String(index + 1).padStart(2, '0')
             const isLast = index === bulletPoints.length - 1
 

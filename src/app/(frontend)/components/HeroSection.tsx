@@ -86,7 +86,7 @@ export default async function HeroSection() {
       {stats && stats.length > 0 && (
         <div className="relative z-10 px-8 md:px-20 pb-[60px]">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0">
-            {stats.map((stat, index) => (
+            {stats.map((stat: { value: string; label: string }, index: number) => (
               <React.Fragment key={index}>
                 {index > 0 && (
                   <div className="hidden md:block w-[1px] h-12 bg-white/10 mx-10" />

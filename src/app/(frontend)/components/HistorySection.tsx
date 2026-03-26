@@ -38,7 +38,7 @@ export default async function HistorySection() {
         {/* Right column */}
         <div className="flex-1 md:pt-[60px]">
           <div className="flex flex-col gap-6">
-            {paragraphs?.map((paragraph, index) => (
+            {paragraphs?.map((paragraph: { text: string }, index: number) => (
               <p
                 key={index}
                 className="font-body text-[17px] font-normal leading-[30px]"
