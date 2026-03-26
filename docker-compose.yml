@@ -4,7 +4,7 @@ services:
     expose:
       - '3000'
     environment:
-      - DATABASE_URI=postgresql://payload:payload@postgres:5432/payload
+      - DATABASE_URI=postgresql://${POSTGRES_USER:-payload}:${POSTGRES_PASSWORD:-payload}@postgres:5432/${POSTGRES_DB:-payload}
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
       - RESEND_API_KEY=${RESEND_API_KEY}
       - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
@@ -20,9 +20,9 @@ services:
     expose:
       - '5432'
     environment:
-      POSTGRES_USER: payload
-      POSTGRES_PASSWORD: payload
-      POSTGRES_DB: payload
+      POSTGRES_USER: ${POSTGRES_USER:-payload}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-payload}
+      POSTGRES_DB: ${POSTGRES_DB:-payload}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
