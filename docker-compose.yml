@@ -1,8 +1,8 @@
 services:
   app:
     build: .
-    ports:
-      - '3000:3000'
+    expose:
+      - '3000'
     environment:
       - DATABASE_URI=postgresql://payload:payload@postgres:5432/payload
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
@@ -17,8 +17,8 @@ services:
   postgres:
     image: postgres:16-alpine
     restart: unless-stopped
-    ports:
-      - '5436:5432'
+    expose:
+      - '5432'
     environment:
       POSTGRES_USER: payload
       POSTGRES_PASSWORD: payload
