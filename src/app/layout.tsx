@@ -15,7 +15,10 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'S.O.S Segurança',
+  title: {
+    default: 'S.O.S Segurança',
+    template: '%s | S.O.S Segurança',
+  },
   description: 'Segurança para Eventos, Portarias e Postos de Vigilância em Gramado RS',
 }
 
