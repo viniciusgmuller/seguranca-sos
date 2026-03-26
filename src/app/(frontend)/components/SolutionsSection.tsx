@@ -70,7 +70,7 @@ export default async function SolutionsSection() {
   })
 
   return (
-    <section id="Solucoes" className="bg-white py-[120px] px-8 md:px-20">
+    <section id="Solucoes" className="bg-white py-16 md:py-[120px] px-5 md:px-20">
       {/* Section header */}
       <div className="max-w-[480px] mb-14">
         <div className="flex items-center gap-4 mb-5">

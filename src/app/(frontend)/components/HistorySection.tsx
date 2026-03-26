@@ -11,12 +11,12 @@ export default async function HistorySection() {
   const { title, paragraphs, founders } = historyData
 
   return (
-    <section className="w-full bg-[#0a0a0a] py-[80px] px-8 md:py-[120px] md:px-20">
+    <section className="w-full bg-[#0a0a0a] py-16 px-5 md:py-[120px] md:px-20">
       <div className="flex flex-col md:flex-row gap-12 md:gap-[80px]">
         {/* Left column */}
         <div className="md:w-[400px] md:flex-shrink-0">
           <span
-            className="block font-heading text-[80px] md:text-[140px] font-bold leading-[80px] md:leading-[120px] tracking-[-0.05em]"
+            className="block font-heading text-[64px] md:text-[140px] font-bold leading-[64px] md:leading-[120px] tracking-[-0.05em]"
             style={{ color: 'rgba(156,202,51,0.08)' }}
           >
             02

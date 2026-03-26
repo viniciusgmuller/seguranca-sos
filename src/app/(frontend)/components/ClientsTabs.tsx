@@ -63,7 +63,7 @@ export default function ClientsTabs({ grouped }: ClientsTabsProps) {
         {grouped[active].map((client) => (
           <span
             key={client.id}
-            className="rounded-lg border border-[#e5e5e0] px-6 py-3.5 font-body text-[14px] font-normal text-[#2a2a2a]"
+            className="rounded-lg border border-[#e5e5e0] px-4 md:px-6 py-3 md:py-3.5 font-body text-[13px] md:text-[14px] font-normal text-[#2a2a2a]"
           >
             {client.name}
           </span>

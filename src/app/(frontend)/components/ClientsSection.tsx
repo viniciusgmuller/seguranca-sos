@@ -31,7 +31,7 @@ export default async function ClientsSection() {
   }
 
   return (
-    <section id="Clientes" className="bg-white py-[120px] px-8 md:px-20">
+    <section id="Clientes" className="bg-white py-16 md:py-[120px] px-5 md:px-20">
       <ClientsTabs grouped={grouped} />
     </section>
   )

@@ -18,7 +18,7 @@ export default async function HeroSection() {
       : null
 
   return (
-    <section className="relative w-full min-h-[720px] bg-[#0a0a0a] overflow-hidden flex flex-col">
+    <section className="relative w-full min-h-[600px] md:min-h-[720px] bg-[#0a0a0a] overflow-hidden flex flex-col">
       {/* Background image */}
       {bgImage?.url && (
         <Image
@@ -41,10 +41,10 @@ export default async function HeroSection() {
       />
 
       {/* Green accent line top-left */}
-      <div className="absolute top-0 left-20 w-[120px] h-[3px] bg-primary" />
+      <div className="absolute top-0 left-5 md:left-20 w-[80px] md:w-[120px] h-[3px] bg-primary" />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-8 md:px-20 pt-24 md:pt-[120px] pb-8">
+      <div className="relative z-10 flex-1 flex flex-col justify-center px-5 md:px-20 pt-24 md:pt-[120px] pb-8">
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-6">
           <span className="block w-8 h-[2px] bg-primary" />
@@ -84,7 +84,7 @@ export default async function HeroSection() {
 
       {/* Stats bar */}
       {stats && stats.length > 0 && (
-        <div className="relative z-10 px-8 md:px-20 pb-[60px]">
+        <div className="relative z-10 px-5 md:px-20 pb-10 md:pb-[60px]">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0">
             {stats.map((stat: { value: string; label: string }, index: number) => (
               <React.Fragment key={index}>

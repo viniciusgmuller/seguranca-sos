@@ -11,7 +11,7 @@ export default async function ContactSection() {
 
   return (
     <section id="Localizacao-e-contato" className="w-full bg-primary">
-      <div className="flex flex-col lg:flex-row gap-16 px-8 md:px-20 py-[120px]">
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 px-5 md:px-20 py-16 md:py-[120px]">
         {/* Left: Form */}
         <div className="flex flex-col gap-8 flex-1">
           <div className="flex flex-col gap-4">
@@ -21,7 +21,7 @@ export default async function ContactSection() {
                 Fale conosco
               </span>
             </div>
-            <h2 className="font-heading text-5xl md:text-[48px] font-bold text-[#0a0a0a] tracking-[-0.03em] leading-[52px]">
+            <h2 className="font-heading text-[36px] md:text-[48px] font-bold text-[#0a0a0a] tracking-[-0.03em] leading-[1.1] md:leading-[52px]">
               Contato
             </h2>
           </div>
