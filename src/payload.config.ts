@@ -24,6 +24,14 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    livePreview: {
+      url: () => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+        return baseUrl
+      },
+      globals: ['site-config', 'hero-section', 'why-section', 'history-section'],
+      collections: ['slides', 'services', 'clients'],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },

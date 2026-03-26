@@ -3,9 +3,11 @@ import Script from 'next/script'
 import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { draftMode } from 'next/headers'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import { LivePreviewListener } from './components/LivePreviewListener'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 
@@ -91,8 +93,11 @@ export default async function FrontendLayout({
 
   const isGTM = gaId.startsWith('GTM-')
 
+  const { isEnabled: isDraftMode } = await draftMode()
+
   return (
     <>
+      {isDraftMode && <LivePreviewListener />}
       {gaId && !isGTM && (
         <>
           <Script
