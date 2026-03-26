@@ -2,8 +2,9 @@ import HeroSection from './components/HeroSection'
 import SolutionsSection from './components/SolutionsSection'
 import WhySection from './components/WhySection'
 import ClientsSection from './components/ClientsSection'
-import HistorySection from './components/HistorySection'
 import PhotosSection from './components/PhotosSection'
+import HistorySection from './components/HistorySection'
+import ContactSection from './components/ContactSection'
 
 export default function Home() {
   return (
@@ -12,8 +13,9 @@ export default function Home() {
       <SolutionsSection />
       <WhySection />
       <ClientsSection />
-      <HistorySection />
       <PhotosSection />
+      <HistorySection />
+      <ContactSection />
     </main>
   )
 }
