@@ -14,7 +14,7 @@ export default async function PhotosSection() {
   return (
     <section id="Galeria" className="bg-[#f5f5f0] py-16 md:py-[120px] pl-5 md:pl-20">
       {/* Section header */}
-      <div className="pr-5 md:pr-20 mb-10 md:mb-14">
+      <div className="max-w-[1440px] mx-auto w-full pr-5 md:pr-20 mb-10 md:mb-14">
         <div className="flex items-center gap-4 mb-5">
           <span className="block w-8 h-[2px] bg-primary" />
           <span className="font-body text-[13px] font-medium uppercase tracking-[0.16em] text-primary">

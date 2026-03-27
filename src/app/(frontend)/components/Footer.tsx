@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Phone, Mail } from 'lucide-react'
 
 type FooterProps = {
@@ -7,6 +8,7 @@ type FooterProps = {
   address: string
   instagram?: string | null
   facebook?: string | null
+  logoUrl?: string | null
 }
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -29,7 +31,7 @@ const siteLinks = [
   { label: 'Contato', href: '#Localizacao-e-contato' },
 ]
 
-export default function Footer({ phone, whatsapp, email, address, instagram, facebook }: FooterProps) {
+export default function Footer({ phone, whatsapp, email, address, instagram, facebook, logoUrl }: FooterProps) {
   const whatsappNumber = whatsapp.replace(/\D/g, '')
   const currentYear = new Date().getFullYear()
 
@@ -40,13 +42,19 @@ export default function Footer({ phone, whatsapp, email, address, instagram, fac
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 bg-primary rounded-md flex items-center justify-center">
-                <span className="text-black font-heading font-bold text-lg leading-none">S</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-white font-heading font-bold text-base leading-tight">S.O.S</span>
-                <span className="text-white/60 text-[10px] tracking-[0.15em] uppercase leading-tight">Segurança</span>
-              </div>
+              {logoUrl ? (
+                <Image src={logoUrl} alt="S.O.S Segurança" width={140} height={48} className="h-10 w-auto object-contain" />
+              ) : (
+                <>
+                  <div className="w-9 h-9 bg-primary rounded-md flex items-center justify-center">
+                    <span className="text-black font-heading font-bold text-lg leading-none">S</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-white font-heading font-bold text-base leading-tight">S.O.S</span>
+                    <span className="text-white/60 text-[10px] tracking-[0.15em] uppercase leading-tight">Segurança</span>
+                  </div>
+                </>
+              )}
             </div>
             <p className="text-white/50 text-sm leading-relaxed">
               Segurança para Eventos, Portarias e Postos de Vigilância em Gramado e região.

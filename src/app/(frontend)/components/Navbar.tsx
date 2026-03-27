@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Phone, Mail } from 'lucide-react'
 import MobileMenuButton from './MobileMenuButton'
 
@@ -5,6 +6,7 @@ type NavbarProps = {
   phone: string
   whatsapp: string
   email: string
+  logoUrl?: string | null
 }
 
 const navLinks = [
@@ -27,7 +29,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
-export default function Navbar({ phone, whatsapp, email }: NavbarProps) {
+export default function Navbar({ phone, whatsapp, email, logoUrl }: NavbarProps) {
   const whatsappNumber = whatsapp.replace(/\D/g, '')
 
   return (
@@ -55,13 +57,19 @@ export default function Navbar({ phone, whatsapp, email }: NavbarProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-primary rounded-md flex items-center justify-center">
-              <span className="text-black font-heading font-bold text-lg leading-none">S</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-white font-heading font-bold text-base leading-tight">S.O.S</span>
-              <span className="text-white/60 text-[10px] tracking-[0.15em] uppercase leading-tight">Segurança</span>
-            </div>
+            {logoUrl ? (
+              <Image src={logoUrl} alt="S.O.S Segurança" width={140} height={48} className="h-10 w-auto object-contain" />
+            ) : (
+              <>
+                <div className="w-9 h-9 bg-primary rounded-md flex items-center justify-center">
+                  <span className="text-black font-heading font-bold text-lg leading-none">S</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-white font-heading font-bold text-base leading-tight">S.O.S</span>
+                  <span className="text-white/60 text-[10px] tracking-[0.15em] uppercase leading-tight">Segurança</span>
+                </div>
+              </>
+            )}
           </a>
 
           {/* Desktop nav */}

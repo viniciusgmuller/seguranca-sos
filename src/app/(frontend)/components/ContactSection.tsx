@@ -10,8 +10,8 @@ export default async function ContactSection() {
   const lng = siteConfig.mapCoordinates?.lng ?? -50.876722
 
   return (
-    <section id="Localizacao-e-contato" className="w-full bg-primary">
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 px-5 md:px-20 py-16 md:py-[120px]">
+    <section id="Localizacao-e-contato" className="w-full bg-primary px-5 md:px-20 py-16 md:py-[120px]">
+      <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:flex-row gap-12 lg:gap-16">
         {/* Left: Form */}
         <div className="flex flex-col gap-8 flex-1">
           <div className="flex flex-col gap-4">

@@ -64,6 +64,7 @@ export default async function FrontendLayout({
   const instagram = siteConfig.instagram ?? null
   const facebook = siteConfig.facebook ?? null
   const gaId = siteConfig.gaId ?? ''
+  const logoUrl = typeof siteConfig.logo === 'object' && siteConfig.logo?.url ? siteConfig.logo.url : null
 
   const lat = siteConfig.mapCoordinates?.lat ?? -29.3877278
   const lng = siteConfig.mapCoordinates?.lng ?? -50.876722
@@ -129,7 +130,7 @@ export default async function FrontendLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Navbar phone={phone} whatsapp={whatsapp} email={email} />
+      <Navbar phone={phone} whatsapp={whatsapp} email={email} logoUrl={logoUrl} />
       <div className="pt-[104px]">{children}</div>
       <Footer
         phone={phone}
@@ -138,6 +139,7 @@ export default async function FrontendLayout({
         address={address}
         instagram={instagram}
         facebook={facebook}
+        logoUrl={logoUrl}
       />
       <WhatsAppButton whatsapp={whatsapp} />
     </>

@@ -12,6 +12,7 @@ export default async function HistorySection() {
 
   return (
     <section className="w-full bg-[#0a0a0a] py-16 px-5 md:py-[120px] md:px-20">
+      <div className="max-w-[1440px] mx-auto w-full">
       <div className="flex flex-col md:flex-row gap-12 md:gap-[80px]">
         {/* Left column */}
         <div className="md:w-[400px] md:flex-shrink-0">
@@ -62,6 +63,7 @@ export default async function HistorySection() {
             </p>
           )}
         </div>
+      </div>
       </div>
     </section>
   )

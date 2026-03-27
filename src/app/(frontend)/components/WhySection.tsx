@@ -12,6 +12,7 @@ export default async function WhySection() {
 
   return (
     <section className="w-full bg-[#0a0a0a] py-16 px-5 md:py-[120px] md:px-20">
+      <div className="max-w-[1440px] mx-auto w-full">
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
         {/* Left column */}
         <div className="w-full lg:w-[440px] lg:shrink-0">
@@ -69,6 +70,7 @@ export default async function WhySection() {
             )
           })}
         </div>
+      </div>
       </div>
     </section>
   )
