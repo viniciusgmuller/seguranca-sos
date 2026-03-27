@@ -18,7 +18,6 @@ export const SiteConfig: GlobalConfig = {
               label: 'Logo',
               type: 'upload',
               relationTo: 'media',
-              required: true,
             },
           ],
         },

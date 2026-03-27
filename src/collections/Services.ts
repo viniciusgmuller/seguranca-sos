@@ -25,7 +25,6 @@ export const Services: CollectionConfig = {
       label: 'Imagem de Fundo',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'order',

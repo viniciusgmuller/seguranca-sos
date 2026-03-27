@@ -19,7 +19,6 @@ export const Slides: CollectionConfig = {
       label: 'Imagem',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'caption',
