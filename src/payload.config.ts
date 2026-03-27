@@ -54,4 +54,16 @@ export default buildConfig({
     supportedLanguages: { pt },
     fallbackLanguage: 'pt',
   },
+  onInit: async (payload) => {
+    // Push schema to database on first init (creates tables if they don't exist)
+    try {
+      if (payload.db && 'push' in payload.db) {
+        // @ts-expect-error push exists on postgres adapter
+        await payload.db.push({ forceAcceptWarning: true })
+        payload.logger.info('Database schema pushed successfully')
+      }
+    } catch (e) {
+      payload.logger.info('Schema push skipped (tables may already exist)')
+    }
+  },
 })
