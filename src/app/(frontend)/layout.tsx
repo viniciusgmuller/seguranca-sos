@@ -29,9 +29,15 @@ export async function generateMetadata(): Promise<Metadata> {
       ? `${SITE_URL}${siteConfig.ogImage.url}`
       : undefined
 
+  const logoUrl =
+    typeof siteConfig.logo === 'object' && siteConfig.logo?.url
+      ? siteConfig.logo.url
+      : undefined
+
   return {
     title,
     description,
+    icons: logoUrl ? { icon: logoUrl, apple: logoUrl } : undefined,
     openGraph: {
       title,
       description,

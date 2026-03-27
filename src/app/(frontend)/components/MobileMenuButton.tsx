@@ -19,21 +19,21 @@ export default function MobileMenuButton({ whatsapp }: { whatsapp: string }) {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="lg:hidden text-white p-2"
+        className="lg:hidden text-[#0a0a0a] p-2"
         aria-label={open ? 'Fechar menu' : 'Abrir menu'}
       >
         {open ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       {open && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a] border-t border-white/[0.08]">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-[#0a0a0a]/10 shadow-lg">
           <nav className="flex flex-col px-6 py-4 gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="font-[var(--font-body)] text-sm font-medium text-white/60 hover:text-primary transition-colors"
+                className="font-[var(--font-body)] text-sm font-medium text-[#0a0a0a]/60 hover:text-primary transition-colors"
               >
                 {link.label}
               </a>

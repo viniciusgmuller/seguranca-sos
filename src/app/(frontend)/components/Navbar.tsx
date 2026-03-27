@@ -35,25 +35,25 @@ export default function Navbar({ phone, whatsapp, email, logoUrl }: NavbarProps)
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top bar */}
-      <div className="bg-[#0a0a0a] border-b border-white/[0.08]">
+      <div className="bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-end items-center h-10 gap-6 text-sm">
-          <a href={`tel:${phone.replace(/\D/g, '')}`} className="hidden sm:flex items-center gap-1.5 text-white/60 hover:text-primary transition-colors">
-            <Phone size={14} className="text-primary" />
+          <a href={`tel:${phone.replace(/\D/g, '')}`} className="hidden sm:flex items-center gap-1.5 text-[#0a0a0a]/70 hover:text-[#0a0a0a] transition-colors">
+            <Phone size={14} className="text-[#0a0a0a]" />
             <span>{phone}</span>
           </a>
-          <a href={`https://wa.me/55${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white/60 hover:text-primary transition-colors">
-            <WhatsAppIcon className="w-3.5 h-3.5 text-primary" />
+          <a href={`https://wa.me/55${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[#0a0a0a]/70 hover:text-[#0a0a0a] transition-colors">
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#0a0a0a]" />
             <span>{whatsapp}</span>
           </a>
-          <a href={`mailto:${email}`} className="hidden md:flex items-center gap-1.5 text-white/60 hover:text-primary transition-colors">
-            <Mail size={14} className="text-primary" />
+          <a href={`mailto:${email}`} className="hidden md:flex items-center gap-1.5 text-[#0a0a0a]/70 hover:text-[#0a0a0a] transition-colors">
+            <Mail size={14} className="text-[#0a0a0a]" />
             <span>{email}</span>
           </a>
         </div>
       </div>
 
       {/* Main nav */}
-      <div className="bg-[#0a0a0a]/95 backdrop-blur-sm">
+      <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5">
@@ -65,8 +65,8 @@ export default function Navbar({ phone, whatsapp, email, logoUrl }: NavbarProps)
                   <span className="text-black font-heading font-bold text-lg leading-none">S</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-white font-heading font-bold text-base leading-tight">S.O.S</span>
-                  <span className="text-white/60 text-[10px] tracking-[0.15em] uppercase leading-tight">Segurança</span>
+                  <span className="text-[#0a0a0a] font-heading font-bold text-base leading-tight">S.O.S</span>
+                  <span className="text-[#0a0a0a]/50 text-[10px] tracking-[0.15em] uppercase leading-tight">Segurança</span>
                 </div>
               </>
             )}
@@ -78,7 +78,7 @@ export default function Navbar({ phone, whatsapp, email, logoUrl }: NavbarProps)
               <a
                 key={link.label}
                 href={link.href}
-                className="font-body text-sm font-medium text-white/60 hover:text-primary transition-colors"
+                className="font-body text-sm font-medium text-[#0a0a0a]/60 hover:text-primary transition-colors"
               >
                 {link.label}
               </a>
