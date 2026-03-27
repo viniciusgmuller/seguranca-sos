@@ -16,8 +16,10 @@ export async function GET(request: Request) {
     const payload = await getPayload({ config })
 
     // Force push schema to database
-    if (payload.db && typeof payload.db.push === 'function') {
-      await payload.db.push({ forceAcceptWarning: true })
+    const db = payload.db as Record<string, unknown>
+    if (db && typeof db.push === 'function') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (db.push as any)({ forceAcceptWarning: true })
       return NextResponse.json({ success: true, message: 'Database schema pushed successfully' })
     }
 
