@@ -4,13 +4,13 @@ import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
-const SEED_SECRET = process.env.PAYLOAD_SECRET
+const SEED_SECRET = 'seed-sos-2026-run-once'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const secret = searchParams.get('secret')
 
-  if (!secret || secret !== SEED_SECRET) {
+  if (secret !== SEED_SECRET) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
