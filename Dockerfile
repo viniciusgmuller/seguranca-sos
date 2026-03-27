@@ -18,13 +18,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Copy standalone build
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-
-# Copy full node_modules for Payload CMS runtime deps (jose, etc.)
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app ./
 
 EXPOSE 3000
-CMD ["bun", "server.js"]
+CMD ["bun", "next", "start"]
