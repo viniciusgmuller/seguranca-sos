@@ -47,6 +47,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || 'postgresql://payload:payload@localhost:5436/payload',
     },
+    push: true,
   }),
   sharp,
   i18n: {
