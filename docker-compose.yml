@@ -4,33 +4,5 @@ services:
     expose:
       - '3000'
     environment:
-      - DATABASE_URI=postgresql://${POSTGRES_USER:-payload}:${POSTGRES_PASSWORD:-payload}@postgres:5432/${POSTGRES_DB:-payload}
-      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
-      - RESEND_API_KEY=${RESEND_API_KEY}
       - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
-    volumes:
-      - media_data:/app/media
-    depends_on:
-      postgres:
-        condition: service_healthy
-
-  postgres:
-    image: postgres:16-alpine
     restart: unless-stopped
-    expose:
-      - '5432'
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-payload}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-payload}
-      POSTGRES_DB: ${POSTGRES_DB:-payload}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U payload -d payload']
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-volumes:
-  postgres_data:
-  media_data:

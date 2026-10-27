@@ -42,7 +42,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# payload
-/src/media
-/src/payload-types.ts
+# local
 .env.coolify

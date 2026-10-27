@@ -1,28 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import config from '@payload-config'
+import { hero, siteConfig } from '@/content/site'
 
-export default async function HeroSection() {
-  const payload = await getPayload({ config })
-
-  const heroData = await payload.findGlobal({
-    slug: 'hero-section',
-  })
-
-  const { eyebrow, title, description, backgroundImage, ctaText, stats } = heroData
-
-  const bgImage =
-    backgroundImage && typeof backgroundImage === 'object' && 'url' in backgroundImage
-      ? backgroundImage
-      : null
+export default function HeroSection() {
+  const { eyebrow, title, description, backgroundImage, ctaText, stats } = hero
+  const whatsappNumber = siteConfig.whatsapp.replace(/\D/g, '')
 
   return (
     <section className="relative w-full min-h-[600px] md:min-h-[720px] bg-[#0a0a0a] overflow-hidden flex flex-col">
       {/* Background image */}
-      {bgImage?.url && (
+      {backgroundImage && (
         <Image
-          src={bgImage.url}
+          src={backgroundImage}
           alt=""
           fill
           className="object-cover opacity-30"
@@ -48,9 +37,7 @@ export default async function HeroSection() {
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-6">
           <span className="block w-8 h-[2px] bg-primary" />
-          <span
-            className="font-body text-[13px] font-medium uppercase tracking-[0.16em] text-primary"
-          >
+          <span className="font-body text-[13px] font-medium uppercase tracking-[0.16em] text-primary">
             {eyebrow}
           </span>
         </div>
@@ -68,7 +55,9 @@ export default async function HeroSection() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="#email-form"
+            href={`https://wa.me/55${whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-7 py-3 bg-primary text-[#0a0a0a] rounded-md font-body text-[15px] font-medium hover:bg-primary/90 transition-colors"
           >
             {ctaText}
@@ -86,7 +75,7 @@ export default async function HeroSection() {
       {stats && stats.length > 0 && (
         <div className="relative z-10 px-5 md:px-20 pb-10 md:pb-[60px] max-w-[1440px] mx-auto w-full">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0">
-            {stats.map((stat: { value: string; label: string }, index: number) => (
+            {stats.map((stat, index) => (
               <React.Fragment key={index}>
                 {index > 0 && (
                   <div className="hidden md:block w-[1px] h-12 bg-white/10 mx-10" />

@@ -1,34 +1,20 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
 import ClientsTabs from './ClientsTabs'
+import { clients, type ClientCategory } from '@/content/site'
 
-type Category = 'fixo' | 'evento' | 'parceiro'
-
-export default async function ClientsSection() {
-  const payload = await getPayload({ config })
-
-  const { docs } = await payload.find({
-    collection: 'clients',
-    sort: 'name',
-    limit: 500,
-  })
-
-  const grouped: Record<Category, { id: string; name: string; category: Category }[]> = {
+export default function ClientsSection() {
+  const grouped: Record<ClientCategory, { id: string; name: string; category: ClientCategory }[]> = {
     fixo: [],
     evento: [],
     parceiro: [],
   }
 
-  for (const doc of docs) {
-    const cat = doc.category as Category
-    if (grouped[cat]) {
-      grouped[cat].push({
-        id: String(doc.id),
-        name: doc.name as string,
-        category: cat,
-      })
-    }
-  }
+  clients.forEach((client, index) => {
+    grouped[client.category].push({
+      id: String(index),
+      name: client.name,
+      category: client.category,
+    })
+  })
 
   return (
     <section id="Clientes" className="bg-white py-16 md:py-[120px] px-5 md:px-20">

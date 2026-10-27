@@ -1,14 +1,7 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
+import { history } from '@/content/site'
 
-export default async function HistorySection() {
-  const payload = await getPayload({ config })
-
-  const historyData = await payload.findGlobal({
-    slug: 'history-section',
-  })
-
-  const { title, paragraphs, founders } = historyData
+export default function HistorySection() {
+  const { title, paragraphs, founders } = history
 
   return (
     <section className="w-full bg-[#0a0a0a] py-16 px-5 md:py-[120px] md:px-20">
@@ -39,7 +32,7 @@ export default async function HistorySection() {
         {/* Right column */}
         <div className="flex-1 md:pt-[60px]">
           <div className="flex flex-col gap-6">
-            {paragraphs?.map((paragraph: { text: string }, index: number) => (
+            {paragraphs?.map((paragraph, index) => (
               <p
                 key={index}
                 className="font-body text-[17px] font-normal leading-[30px]"

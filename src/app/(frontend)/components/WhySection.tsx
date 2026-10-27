@@ -1,14 +1,7 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
+import { why } from '@/content/site'
 
-export default async function WhySection() {
-  const payload = await getPayload({ config })
-
-  const whyData = await payload.findGlobal({
-    slug: 'why-section',
-  })
-
-  const { title, description, bulletPoints } = whyData
+export default function WhySection() {
+  const { title, description, bulletPoints } = why
 
   return (
     <section className="w-full bg-[#0a0a0a] py-16 px-5 md:py-[120px] md:px-20">
@@ -37,7 +30,7 @@ export default async function WhySection() {
 
         {/* Right column */}
         <div className="flex-1 pt-0 lg:pt-5">
-          {bulletPoints?.map((point: { title: string; subtitle?: string }, index: number) => {
+          {bulletPoints?.map((point, index) => {
             const number = String(index + 1).padStart(2, '0')
             const isLast = index === bulletPoints.length - 1
 

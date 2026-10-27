@@ -1,16 +1,7 @@
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import config from '@payload-config'
+import { gallery } from '@/content/site'
 
-export default async function PhotosSection() {
-  const payload = await getPayload({ config })
-
-  const { docs: slides } = await payload.find({
-    collection: 'slides',
-    sort: 'order',
-    limit: 100,
-  })
-
+export default function PhotosSection() {
   return (
     <section id="Galeria" className="bg-[#f5f5f0] py-16 md:py-[120px] pl-5 md:pl-20">
       {/* Section header */}
@@ -36,41 +27,28 @@ export default async function PhotosSection() {
           WebkitOverflowScrolling: 'touch',
         }}
       >
-        {slides.map((slide) => {
-          const image =
-            slide.image && typeof slide.image === 'object' && 'url' in slide.image
-              ? slide.image
-              : null
+        {gallery.map((item, index) => (
+          <div
+            key={index}
+            className="relative w-[300px] md:w-[400px] h-[280px] rounded-xl flex-shrink-0 overflow-hidden"
+            style={{ scrollSnapAlign: 'start' }}
+          >
+            <Image
+              src={item.image}
+              alt={item.caption}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 300px, 400px"
+            />
 
-          return (
-            <div
-              key={slide.id}
-              className="relative w-[300px] md:w-[400px] h-[280px] rounded-xl flex-shrink-0 overflow-hidden"
-              style={{ scrollSnapAlign: 'start' }}
-            >
-              {image?.url ? (
-                <Image
-                  src={image.url}
-                  alt={(slide.caption as string) || ''}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 300px, 400px"
-                />
-              ) : (
-                <div className="w-full h-full bg-[#2a2a2a]" />
-              )}
-
-              {/* Caption overlay */}
-              {slide.caption && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 py-5">
-                  <p className="font-body text-[15px] font-medium text-white">
-                    {slide.caption as string}
-                  </p>
-                </div>
-              )}
-            </div>
-          )
-        })}
+            {/* Caption overlay */}
+            {item.caption && (
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 py-5">
+                <p className="font-body text-[15px] font-medium text-white">{item.caption}</p>
+              </div>
+            )}
+          </div>
+        ))}
 
         {/* Spacer to give some right padding at the end of the scroll */}
         <div className="w-8 md:w-20 flex-shrink-0" aria-hidden="true" />

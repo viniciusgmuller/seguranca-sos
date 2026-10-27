@@ -1,87 +1,40 @@
 import React from 'react'
-import Script from 'next/script'
 import type { Metadata } from 'next'
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import { draftMode } from 'next/headers'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
-import { LivePreviewListener } from './components/LivePreviewListener'
+import { siteConfig } from '@/content/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://segurancasos.com.br'
 
-async function getSiteConfig() {
-  const payload = await getPayload({ config })
-  return payload.findGlobal({ slug: 'site-config' })
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: siteConfig.metaTitle,
+  description: siteConfig.metaDescription,
+  icons: { icon: siteConfig.logo, apple: siteConfig.logo },
+  openGraph: {
+    title: siteConfig.metaTitle,
+    description: siteConfig.metaDescription,
+    url: SITE_URL,
+    siteName: 'S.O.S Segurança',
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.metaTitle,
+    description: siteConfig.metaDescription,
+  },
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const siteConfig = await getSiteConfig()
-
-  const title = siteConfig.metaTitle ?? 'S.O.S Segurança'
-  const description =
-    siteConfig.metaDescription ??
-    'Segurança para Eventos, Portarias e Postos de Vigilância em Gramado RS'
-
-  const ogImage =
-    typeof siteConfig.ogImage === 'object' && siteConfig.ogImage?.url
-      ? `${SITE_URL}${siteConfig.ogImage.url}`
-      : undefined
-
-  const logoUrl =
-    typeof siteConfig.logo === 'object' && siteConfig.logo?.url
-      ? siteConfig.logo.url
-      : undefined
-
-  return {
-    title,
-    description,
-    icons: logoUrl ? { icon: logoUrl, apple: logoUrl } : undefined,
-    openGraph: {
-      title,
-      description,
-      url: SITE_URL,
-      siteName: 'S.O.S Segurança',
-      locale: 'pt_BR',
-      type: 'website',
-      ...(ogImage ? { images: [{ url: ogImage, alt: title }] } : {}),
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      ...(ogImage ? { images: [ogImage] } : {}),
-    },
-  }
-}
-
-export default async function FrontendLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const siteConfig = await getSiteConfig()
-
-  const phone = siteConfig.phone ?? '(54) 3286-5902'
-  const whatsapp = siteConfig.whatsapp ?? '(54) 99920-1576'
-  const email = siteConfig.email ?? 'contato@sosseguranca.com.br'
-  const address = siteConfig.address ?? ''
-  const instagram = siteConfig.instagram ?? null
-  const facebook = siteConfig.facebook ?? null
-  const gaId = siteConfig.gaId ?? ''
-  const logoUrl = typeof siteConfig.logo === 'object' && siteConfig.logo?.url ? siteConfig.logo.url : null
-
-  const lat = siteConfig.mapCoordinates?.lat ?? -29.3877278
-  const lng = siteConfig.mapCoordinates?.lng ?? -50.876722
+export default function FrontendLayout({ children }: { children: React.ReactNode }) {
+  const { phone, whatsapp, email, address, instagram, facebook, logo, mapCoordinates } = siteConfig
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'S.O.S Segurança',
-    description:
-      siteConfig.metaDescription ??
-      'Segurança para Eventos, Portarias e Postos de Vigilância em Gramado RS',
+    description: siteConfig.metaDescription,
     telephone: phone,
     address: {
       '@type': 'PostalAddress',
@@ -93,59 +46,27 @@ export default async function FrontendLayout({
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: lat,
-      longitude: lng,
+      latitude: mapCoordinates.lat,
+      longitude: mapCoordinates.lng,
     },
   }
 
-  const isGTM = gaId.startsWith('GTM-')
-
-  const { isEnabled: isDraftMode } = await draftMode()
-
   return (
     <>
-      {isDraftMode && <LivePreviewListener />}
-      {gaId && !isGTM && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-            strategy="afterInteractive"
-          />
-          <Script id="ga4-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${gaId}');
-            `}
-          </Script>
-        </>
-      )}
-      {gaId && isGTM && (
-        <Script id="gtm-init" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${gaId}');
-          `}
-        </Script>
-      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Navbar phone={phone} whatsapp={whatsapp} email={email} logoUrl={logoUrl} />
+      <Navbar phone={phone} whatsapp={whatsapp} email={email} logoUrl={logo} />
       <div className="pt-[104px]">{children}</div>
       <Footer
         phone={phone}
         whatsapp={whatsapp}
         email={email}
         address={address}
-        instagram={instagram}
-        facebook={facebook}
-        logoUrl={logoUrl}
+        instagram={instagram || null}
+        facebook={facebook || null}
+        logoUrl={logo}
       />
       <WhatsAppButton whatsapp={whatsapp} />
     </>

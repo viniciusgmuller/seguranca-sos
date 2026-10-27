@@ -1,6 +1,4 @@
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import config from '@payload-config'
 import {
   Shield,
   DoorOpen,
@@ -13,6 +11,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import type { ComponentType, SVGProps } from 'react'
+import { services } from '@/content/site'
 
 type LucideIcon = ComponentType<SVGProps<SVGSVGElement> & { size?: number | string }>
 
@@ -60,15 +59,7 @@ function getCardStyle(index: number, isLast: boolean) {
   }
 }
 
-export default async function SolutionsSection() {
-  const payload = await getPayload({ config })
-
-  const { docs: services } = await payload.find({
-    collection: 'services',
-    sort: 'order',
-    limit: 100,
-  })
-
+export default function SolutionsSection() {
   return (
     <section id="Solucoes" className="bg-white py-16 md:py-[120px] px-5 md:px-20">
       <div className="max-w-[1440px] mx-auto w-full">
@@ -90,29 +81,18 @@ export default async function SolutionsSection() {
         {services.map((service, index) => {
           const isLast = index === services.length - 1
           const style = getCardStyle(index, isLast)
-          const Icon = iconMap[service.title as string] ?? Shield
-
-          const bgImage =
-            service.backgroundImage &&
-            typeof service.backgroundImage === 'object' &&
-            'url' in service.backgroundImage
-              ? service.backgroundImage
-              : null
+          const Icon = iconMap[service.title] ?? Shield
+          const bgImage = service.image
 
           return (
             <div
-              key={service.id}
+              key={service.title}
               className={`relative h-[280px] rounded-xl p-7 flex flex-col justify-between overflow-hidden ${!bgImage ? style.bg : ''}`}
             >
               {/* Background image with overlay */}
-              {bgImage?.url && (
+              {bgImage && (
                 <>
-                  <Image
-                    src={bgImage.url}
-                    alt=""
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={bgImage} alt="" fill className="object-cover" />
                   <div className="absolute inset-0 bg-[#0a0a0a]/65" />
                 </>
               )}
@@ -124,10 +104,7 @@ export default async function SolutionsSection() {
                     bgImage ? 'bg-white/15' : style.iconBg
                   }`}
                 >
-                  <Icon
-                    size={20}
-                    className={bgImage ? 'text-primary' : style.iconColor}
-                  />
+                  <Icon size={20} className={bgImage ? 'text-primary' : style.iconColor} />
                 </div>
               </div>
 
@@ -137,7 +114,7 @@ export default async function SolutionsSection() {
                   bgImage ? 'text-white' : style.text
                 }`}
               >
-                {service.title as string}
+                {service.title}
               </h3>
             </div>
           )
