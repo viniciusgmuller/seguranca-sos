@@ -389,16 +389,33 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
       'END:VCARD'
     ].join('\n');
 
-    // QR code com o contato (vCard)
+    // QR code com o contato (vCard).
+    // Render determinístico: o qrcodejs 1.0.0 troca o canvas por um <img> de forma
+    // assíncrona e isso falhava aqui (canvas saía transparente, QR em branco). Então
+    // geramos num nó temporário e copiamos só o canvas pintado pro #qr (em 2x p/ nitidez).
     try {
-      new QRCode(document.getElementById('qr'), {
+      var _qrTmp = document.createElement('div')
+      new QRCode(_qrTmp, {
         text: vcard,
-        width: 180,
-        height: 180,
+        width: 360,
+        height: 360,
         colorDark: '#0a0e0b',
         colorLight: '#ffffff',
         correctLevel: QRCode.CorrectLevel.M
-      });
+      })
+      var _qrSrc = _qrTmp.querySelector('canvas')
+      if (_qrSrc) {
+        var _qrBox = document.getElementById('qr')
+        _qrBox.innerHTML = ''
+        var _qrCanvas = document.createElement('canvas')
+        _qrCanvas.width = 360
+        _qrCanvas.height = 360
+        _qrCanvas.style.width = '180px'
+        _qrCanvas.style.height = '180px'
+        _qrCanvas.style.display = 'block'
+        _qrCanvas.getContext('2d').drawImage(_qrSrc, 0, 0)
+        _qrBox.appendChild(_qrCanvas)
+      }
     } catch (e) {}
 
     // Copiar números/e-mail/endereço
