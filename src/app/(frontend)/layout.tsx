@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import { siteConfig } from '@/content/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://segurancasos.com.br'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://segurancasos.com.br'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
