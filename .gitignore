@@ -44,3 +44,6 @@ next-env.d.ts
 
 # local
 .env.coolify
+
+# Docs de segurança (NUNCA versionar — contém IP de origem, infra, achados)
+/docs/seguranca/
