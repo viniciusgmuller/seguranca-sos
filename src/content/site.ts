@@ -7,7 +7,7 @@
 export type ClientCategory = 'fixo' | 'evento' | 'parceiro'
 
 export const siteConfig = {
-  phone: '(54) 3286-5902',
+  phone: '(54) 99944-0370',
   whatsapp: '(54) 99920-1576',
   email: 'soseventoseservicos@terra.com.br',
   address: 'R. F. G. Bier, 458 - Planalto, Gramado - RS, 95670-000',
